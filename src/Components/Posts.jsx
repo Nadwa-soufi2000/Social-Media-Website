@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import axios from "axios";
+import { baseURL } from "./Api";
 
 export default function Posts()
 {
@@ -8,7 +9,7 @@ export default function Posts()
     useEffect(() => {
         try
         {
-            axios.get("https://tarmeezAcademy.com/api/v1/posts")
+            axios.get(`${baseURL}/posts`)
            .then((res) => {
                setData(res.data.data)
                console.log(res)
@@ -33,7 +34,7 @@ export default function Posts()
     />
       )
     return(
-        <div className="w-[80%] flex justify-between items-center flex-col px-6  rounded-[10px] gap-9">
+        <div className="xl:w-[90%] w-full flex justify-center items-center flex-wrap flex-col lg:flex-row  px-1 py-3  rounded-[10px] gap-9">
             {showPosts}
         </div>
     )
