@@ -1,8 +1,9 @@
 //import { useState } from "react";
 import { Form , Button , Modal } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState } from "react";
+import { useContext, useState } from "react";
 import  { postData } from "./Authnticated";
+import { User } from "./UserData";
 //import axios from "axios";
 //import { baseURL } from "./Api";
 
@@ -11,8 +12,13 @@ export default function ModalComponent({show , handleClose , ButtonName})
 {
   const[userName , setUserName] = useState('')
   const[Password , setPassword] = useState('')
-  const[Image , setImage] = useState('')
+  const[Image , setImage] = useState()
   const[Name , setName] = useState('')
+  const[Email , setEmail] = useState('')
+  
+
+  const userData = useContext(User)
+
     
   const LoginForm = new FormData();
   LoginForm.append("username" , userName)
@@ -21,8 +27,9 @@ export default function ModalComponent({show , handleClose , ButtonName})
   const RegisterForm = new FormData();
   RegisterForm.append("username" , userName)
   RegisterForm.append("password" , Password)
-  RegisterForm.append("Image" , Image)
+  RegisterForm.append("image" , Image)
   RegisterForm.append("name" , Name)
+  RegisterForm.append("email" , Email)
 
   const handleData = () => 
   {
@@ -32,14 +39,14 @@ export default function ModalComponent({show , handleClose , ButtonName})
     }
     else
     {
-      postData("register" , RegisterForm)
+      postData("register" , RegisterForm )
     }
   }
 
 
 
     return(
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} id="mm">
                      <Modal.Header closeButton>
                          <Modal.Title>
                             {
@@ -68,6 +75,17 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                />
                           </div>
                           <div className="w-full flex flex-col justify-center items-start gap-2">
+                               <Form.Label htmlFor="inputEmail">Email</Form.Label>
+                               <Form.Control
+                                   type="email"
+                                   id="inputEmail"
+                                   aria-describedby="TextHelpBlock"
+                                   placeholder="Enter your email"
+                                   value={Email}
+                                   onChange={(e) => setEmail(e.target.value)}
+                               />
+                          </div>
+                          <div className="w-full flex flex-col justify-center items-start gap-2">
                                <Form.Label htmlFor="inputImage">Profile Image</Form.Label>
                                <div className="flex justify-center items-center w-full relative">
                                 <Form.Label className="bg-[#2875bd] text-white rounded-[8px] w-full h-full pt-2 text-center absolute" htmlFor="inputImage" >Choose a photo</Form.Label>
@@ -76,7 +94,7 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                    id="inputImage"
                                    aria-describedby="ImageHelpBlock"
                                    className="border-none rounded-[20px]"
-                                   onChange={(e) => setImage(e.target.files)}
+                                   onChange={(e) => setImage(e.target.files[0])}
                                />
                                </div>
                             </div>
