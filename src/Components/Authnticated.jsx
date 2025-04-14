@@ -16,6 +16,7 @@ export const postData = async (complement , data) =>
         alert(`${complement} successfuly`)
         const token = response.data.token;
         cookie.set("media" , token)
+        window.location.pathname = '/'
     }catch(err){
         console.log(err)
         console.log("error")

@@ -54,13 +54,53 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                 ?
                                 "Login"
                                 :
+                                ButtonName === "Register" ?
                                 "Register"
+                                :
+                                "New Post"
+
                             }
                          </Modal.Title>
                      </Modal.Header>
                      <Modal.Body>
                         <div className="pt-[20px] flex flex-col gap-6">
                         {
+                          ButtonName === "Create"  ?
+                          <>
+                            <div className="w-full flex flex-col justify-center items-start gap-2">
+                                <Form.Label htmlFor="inputTextt">Title</Form.Label>
+                                <Form.Control
+                                     type="text"
+                                     id="inputTextt"
+                                     aria-describedby="TextHelpBlock"
+                                     placeholder="Enter Title"
+                                />
+                            </div>
+                            <div className="w-full flex flex-col justify-center items-start gap-2">
+                                  <Form.Label htmlFor="inputTextt">Body</Form.Label>
+                                  <Form.Control 
+                                     type="text"
+                                     id="inputTexttt"
+                                     as="textarea" 
+                                     aria-label="With textarea" />
+                            </div>
+                            <div className="w-full flex flex-col justify-center items-start gap-2">
+                               <Form.Label htmlFor="inputIm">Image</Form.Label>
+                               <div className="flex justify-center items-center w-full relative">
+                                <Form.Label className="bg-[#2875bd] text-white rounded-[8px] w-full h-full pt-2 text-center absolute" htmlFor="inputIm" >Choose a photo</Form.Label>
+                                <Form.Control
+                                   type="file"
+                                   id="inputIm"
+                                   aria-describedby="ImageHelpBlock"
+                               />
+                               </div>
+                            </div>
+                          </>
+
+
+                            :
+
+
                             ButtonName === "Register" &&
                          <>
                             <div className="w-full flex flex-col justify-center items-start gap-2">
@@ -100,6 +140,9 @@ export default function ModalComponent({show , handleClose , ButtonName})
                             </div>
                            </>
                         }
+                        { 
+                          ButtonName !== 'Create' &&
+                          <>
                           <div className="w-full flex flex-col justify-center items-start gap-2">
                                <Form.Label htmlFor="inputPassword5">Password</Form.Label>
                                <Form.Control
@@ -121,7 +164,9 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                    value={userName}
                                    onChange={(e) => setUserName(e.target.value)}
                                />
-                          </div>     
+                          </div>  
+                          </>  
+                        } 
                           </div>    
                     </Modal.Body>
                     <Modal.Footer>
