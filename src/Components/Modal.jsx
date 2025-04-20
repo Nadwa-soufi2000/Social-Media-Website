@@ -1,9 +1,13 @@
 //import { useState } from "react";
 import { Form , Button , Modal } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useContext, useState } from "react";
+import { useState } from "react";
 import  { postData } from "./Authnticated";
-import { User } from "./UserData";
+//import { User } from "./UserData";
+
+
+import { createPost } from "./CreatePost";
+
 //import axios from "axios";
 //import { baseURL } from "./Api";
 
@@ -15,9 +19,13 @@ export default function ModalComponent({show , handleClose , ButtonName})
   const[Image , setImage] = useState()
   const[Name , setName] = useState('')
   const[Email , setEmail] = useState('')
+
+  const[body , setBody] = useState('')
+  const[title , setTitle] = useState('')
+  const[imageNewPost , setImageNewPost] = useState()
   
 
-  const userData = useContext(User)
+  //const userData = useContext(User)
 
     
   const LoginForm = new FormData();
@@ -31,15 +39,26 @@ export default function ModalComponent({show , handleClose , ButtonName})
   RegisterForm.append("name" , Name)
   RegisterForm.append("email" , Email)
 
+  const CreatePostForm = new FormData();
+  CreatePostForm.append("image" , imageNewPost)
+  CreatePostForm.append("body" , body)
+  CreatePostForm.append("title" , title)
+  
+
+
   const handleData = () => 
   {
     if(ButtonName === "Login")
     {
        postData("login" , LoginForm)
     }
-    else
+    else if(ButtonName === "Register")
     {
       postData("register" , RegisterForm )
+    }
+    else 
+    {
+      createPost(CreatePostForm)
     }
   }
 
@@ -74,15 +93,20 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                      id="inputTextt"
                                      aria-describedby="TextHelpBlock"
                                      placeholder="Enter Title"
+                                     value={title}
+                                     onChange={(e) => setTitle(e.target.value)}
                                 />
                             </div>
                             <div className="w-full flex flex-col justify-center items-start gap-2">
-                                  <Form.Label htmlFor="inputTextt">Body</Form.Label>
+                                  <Form.Label htmlFor="inputTexttt">Body</Form.Label>
                                   <Form.Control 
                                      type="text"
                                      id="inputTexttt"
                                      as="textarea" 
-                                     aria-label="With textarea" />
+                                     aria-label="With textarea" 
+                                     value={body}
+                                     onChange={(e) => setBody(e.target.value)}
+                                   />
                             </div>
                             <div className="w-full flex flex-col justify-center items-start gap-2">
                                <Form.Label htmlFor="inputIm">Image</Form.Label>
@@ -92,6 +116,7 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                    type="file"
                                    id="inputIm"
                                    aria-describedby="ImageHelpBlock"
+                                   onChange={(e) => setImageNewPost(e.target.files[0])}
                                />
                                </div>
                             </div>

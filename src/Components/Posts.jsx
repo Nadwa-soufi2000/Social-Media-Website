@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import axios from "axios";
-import { baseURL } from "./Api";
+import { baseURL, POSTS } from "./Api";
 import ModalComponent from "./Modal";
 import Cookie from 'cookie-universal'
 
@@ -20,7 +20,7 @@ export default function Posts()
     useEffect(() => {
         try
         {
-            axios.get(`${baseURL}/posts`)
+            axios.get(`${baseURL}/${POSTS}`)
            .then((res) => {
                setData(res.data.data)
                console.log(res)
@@ -35,6 +35,7 @@ export default function Posts()
     const showPosts = Data.map((item) => 
     <Card 
        key={item} 
+       id={item.id}
        title={item.title}
        userName={item.author.username}
        profile_image={item.author.profile_image}
