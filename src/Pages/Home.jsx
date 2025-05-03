@@ -1,5 +1,5 @@
 import Navbar from "../Components/Navbar";
-import Posts from "../Components/Posts";
+import Posts from "./Posts";
 
 export default function Home()
 {

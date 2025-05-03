@@ -25,7 +25,6 @@ export default function ModalComponent({show , handleClose , ButtonName})
   const[imageNewPost , setImageNewPost] = useState()
   
 
-  //const userData = useContext(User)
 
     
   const LoginForm = new FormData();
@@ -43,7 +42,6 @@ export default function ModalComponent({show , handleClose , ButtonName})
   CreatePostForm.append("image" , imageNewPost)
   CreatePostForm.append("body" , body)
   CreatePostForm.append("title" , title)
-  
 
 
   const handleData = () => 
@@ -56,7 +54,7 @@ export default function ModalComponent({show , handleClose , ButtonName})
     {
       postData("register" , RegisterForm )
     }
-    else 
+    else
     {
       createPost(CreatePostForm)
     }
@@ -84,7 +82,7 @@ export default function ModalComponent({show , handleClose , ButtonName})
                      <Modal.Body>
                         <div className="pt-[20px] flex flex-col gap-6">
                         {
-                          ButtonName === "Create"  ?
+                          ButtonName === "Create" ?
                           <>
                             <div className="w-full flex flex-col justify-center items-start gap-2">
                                 <Form.Label htmlFor="inputTextt">Title</Form.Label>
@@ -94,7 +92,7 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                      aria-describedby="TextHelpBlock"
                                      placeholder="Enter Title"
                                      value={title}
-                                     onChange={(e) => setTitle(e.target.value)}
+                                     onChange={ (e) => {setTitle(e.target.value)} }
                                 />
                             </div>
                             <div className="w-full flex flex-col justify-center items-start gap-2">
@@ -105,7 +103,7 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                      as="textarea" 
                                      aria-label="With textarea" 
                                      value={body}
-                                     onChange={(e) => setBody(e.target.value)}
+                                     onChange={(e) => {setBody(e.target.value)} }
                                    />
                             </div>
                             <div className="w-full flex flex-col justify-center items-start gap-2">
@@ -116,7 +114,8 @@ export default function ModalComponent({show , handleClose , ButtonName})
                                    type="file"
                                    id="inputIm"
                                    aria-describedby="ImageHelpBlock"
-                                   onChange={(e) => setImageNewPost(e.target.files[0])}
+                                   onChange={(e) =>
+                                    {setImageNewPost(e.target.files[0])}}
                                />
                                </div>
                             </div>

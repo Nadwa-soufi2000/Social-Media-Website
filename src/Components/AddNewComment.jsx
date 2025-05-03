@@ -15,10 +15,10 @@ export const AddComment = async (comment , idPost) =>
         }
         })
         console.log(res)
-        localStorage.setItem('added' , 'true')
+        localStorage.setItem('addedComment' , 'true')
       }catch(err)
       {
         console.log(err)
-        localStorage.setItem('added' , 'false')
+        localStorage.setItem('addedComment' , 'false')
       }
 }

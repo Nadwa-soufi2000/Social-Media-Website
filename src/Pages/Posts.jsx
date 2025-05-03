@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Card from "./Card";
+import Card from "../Components/Card";
 import axios from "axios";
-import { baseURL, POSTS } from "./Api";
-import ModalComponent from "./Modal";
+import { baseURL, POSTS } from "../Components/Api";
+import ModalComponent from "../Components/Modal";
 import Cookie from 'cookie-universal'
 
 export default function Posts()
@@ -13,6 +13,7 @@ export default function Posts()
 
     const cookie = Cookie()
     const getCookie = cookie.get("media")
+    localStorage.removeItem('added')
 
     const handleClose = () => setShow(false)
     const handleClick = () => {setOpenModal(true) ; setShow(true) ; console.log('open' , openModal)}
@@ -20,7 +21,7 @@ export default function Posts()
     useEffect(() => {
         try
         {
-            axios.get(`${baseURL}/${POSTS}`)
+            axios.get(`${baseURL}/${POSTS}?limit=10`)
            .then((res) => {
                setData(res.data.data)
                console.log(res)
@@ -32,9 +33,10 @@ export default function Posts()
         }
     }, [])
     
-    const showPosts = Data.map((item) => 
+    const showPosts = Data.map((item) =>   
     <Card 
        key={item} 
+       itNum={item}
        id={item.id}
        title={item.title}
        userName={item.author.username}
@@ -43,8 +45,11 @@ export default function Posts()
        body={item.body}
        created_at={item.created_at}
        comments_count={item.comments_count}
+       authorId={item.author.id}
     />
-      )
+  )
+    
+     
 
     return(  
       <>

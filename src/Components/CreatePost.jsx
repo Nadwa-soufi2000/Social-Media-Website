@@ -16,6 +16,7 @@ export const createPost = async (dataNewPost) =>
           }
         )
         console.log(res)
+        window.location.pathname = '/'
       }catch(err){
         console.log(err)
         console.log(dataNewPost)

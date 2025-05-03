@@ -4,6 +4,8 @@ import ModalComponent from './Modal';
 import Cookie from 'cookie-universal'
 import { MdMenu } from "react-icons/md";
 import { MdClose } from "react-icons/md";
+import { Alert } from 'react-bootstrap';
+
 
 
 
@@ -13,18 +15,23 @@ export default function Navbar()
   const[state , setState] = useState(null);
   const[open , setOpen] = useState(true);
 
+  const[showAlert , setShowAlert] = useState(false);
+
   const cookie = Cookie()
   const getCookie = cookie.get('media')
 
+  console.log(showAlert)
   
 
   const handleShowLogin = () => {
            setShow(true)
            setState(false)
+           setShowAlert(true)
      }
      const handleShowRegister = () => {
       setShow(true)
       setState(true)
+      setShowAlert(true)
     }
   const handleClose = () => setShow(false)
 
@@ -105,6 +112,20 @@ export default function Navbar()
           </div>
           }
         </div>
+
+         {
+           showAlert && localStorage.getItem('added')  &&
+              <div className='fixed bottom-[5%] right-[3%] w-[330px] h-[90px]'>
+                 <Alert className='w-[330px] h-[90px]' variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                       <p>
+                          Error while login!
+                       </p>
+                 </Alert>
+              </div>
+         } 
+          
+
+
         </>
     )
 }
