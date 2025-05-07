@@ -21,7 +21,7 @@ export default function Posts()
     useEffect(() => {
         try
         {
-            axios.get(`${baseURL}/${POSTS}?limit=10`)
+            axios.get(`${baseURL}/${POSTS}?limit=50`)
            .then((res) => {
                setData(res.data.data)
                console.log(res)
@@ -34,7 +34,7 @@ export default function Posts()
     }, [])
     
     const showPosts = Data.map((item) =>   
-    <Card 
+     <Card 
        key={item} 
        itNum={item}
        id={item.id}

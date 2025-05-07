@@ -7,11 +7,12 @@ import { BiSend } from "react-icons/bi";
 import { AddComment } from '../Components/AddNewComment'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
-import { Alert } from 'react-bootstrap'
+import { Alert, Modal } from 'react-bootstrap'
 import { FaUserEdit } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import Cookie from 'cookie-universal'
 import UpdateModal from '../Components/UpdateModal'
+import { DeletePost } from '../Components/DeletePost'
 
 //<FaUserEdit />
 //<RiDeleteBin5Fill />
@@ -25,8 +26,9 @@ export default function PostDetails()
     const[Open , setOpen] = useState(false)
     const[showComm , setShowComm] = useState(false);
     const[authorId , setauthorId] = useState(0)
-    const[state , setState] = useState(null)
-    const[show , setShow] = useState(true)
+    const[state , setState] = useState()
+    const[show , setShow] = useState(false)
+    const[stateDelete , setStateDelete] = useState()
     const[authorImage , setAuthorimage] = useState()
     const[userName , setUsername] = useState('')
     
@@ -81,12 +83,21 @@ export default function PostDetails()
 
     const handleUpdate = () => 
     {
+       setShow(true)
        setState(true)
+       setStateDelete(false)
     }
 
     const handleClose = () => 
     {
       setShow(false)
+    }
+
+    const handleDelete = () =>
+    {
+      setShow(true)
+      setStateDelete(true)
+      setState(false)
     }
     
         const showComments = comments.map((item , index) => 
@@ -109,8 +120,19 @@ export default function PostDetails()
                  show={show}
                  handleClose={handleClose}
                  idPost = {id}
+                 ButtonName="Update"
              />     
          }
+         {
+            stateDelete &&
+            <UpdateModal
+                 show={show}
+                 handleClose={handleClose}
+                 idPost = {id}
+                 ButtonName="Delete"
+             /> 
+         }
+         
           <div className=' w-full'>
            <div className='w-full flex justify-center items-center p-2 flex-col gap-8'>
                <Navbar />   
@@ -124,7 +146,7 @@ export default function PostDetails()
                               { userId === authorId &&
                                   <div className='flex justify-center items-center gap-2'>
                                       <FaUserEdit onClick={handleUpdate}  className='w-[20px] h-[20px]  fit-content hover:text-gray-700' />
-                                      <RiDeleteBin5Fill className='w-[20px] h-[20px] fit-content hover:text-gray-700 fit-content' />
+                                      <RiDeleteBin5Fill onClick={handleDelete} className='w-[20px] h-[20px] fit-content hover:text-gray-700 fit-content' />
                                   </div>
                               }
                           </div>

@@ -7,7 +7,7 @@ export const UpdatePost = async (idPost , newData) =>
     const token = cookie.get("media")
     console.log(newData)
     try {
-        let res = await axios.post(`${baseURL}/${POSTS}/${idPost}` , newData , 
+        let res = await axios.post(`c` , newData , 
             {
                 headers : {
                    Authorization : "Bearer " + token

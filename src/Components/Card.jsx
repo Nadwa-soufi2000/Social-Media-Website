@@ -11,9 +11,9 @@ export default function Card(props)
                 <img className="w-[50px] h-[50px] rounded-full bg-gray-100 border-[1px] border-white" src={props.profile_image} alt=""/>
                 <p className="font-bold text-[13px] md:text-[18px] text-[#000000]">{props.userName}</p>
              </div>
-             {props.image !== " " && <div className="w-full h-[220px] md:h-[300px] lg:h-[350px] flex justify-center items-center">
+             <div className="w-full h-[220px] md:h-[300px] lg:h-[350px] flex justify-center items-center">
                 <img className="w-full h-full bg-white" src={props.image} />
-             </div> }
+             </div> 
              <div className="flex flex-col justify-center items-start gap-2 w-[97%] border-b-2 border-b-[#c4c1c1]">
                 <p className="font-normal text-gray-500 text-[16px]">{props.created_at}</p>
                 {

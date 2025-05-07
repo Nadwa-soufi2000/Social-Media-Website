@@ -4,8 +4,9 @@ import axios from "axios"
 import { Button, Form, Modal } from "react-bootstrap"
 import { UpdatePost } from "./UpdatePost"
 import { TbRuler } from "react-icons/tb"
+import { DeletePost } from "./DeletePost"
 
-export default function UpdateModal({show , handleClose , idPost})
+export default function UpdateModal({show , handleClose , idPost , ButtonName})
 {
     const[updateBody , setupdateBody] = useState('')
     const[updateTitle , setubdateTitle] = useState('')
@@ -27,8 +28,13 @@ export default function UpdateModal({show , handleClose , idPost})
    
     const handleData = () => 
     {
+      if(ButtonName === "Update")
         UpdatePost(idPost , UpdatePostForm)
+
+      else
+       DeletePost(idPost)
     }
+    
     const UpdatePostForm = new FormData();
     UpdatePostForm.append("body" , updateBody)
     UpdatePostForm.append("title" , updateTitle)
@@ -38,9 +44,18 @@ export default function UpdateModal({show , handleClose , idPost})
     return(
           <Modal show={show} onHide={handleClose} id="mm">
              <Modal.Header closeButton>
-                  <Modal.Title> Update </Modal.Title>
+                  <Modal.Title> 
+                      {
+                         ButtonName === "Update" ?
+                         "Update"
+                         :
+                         "Are you sure you want to delete the post ?"
+                      }
+                     </Modal.Title>
              </Modal.Header>
-             <Modal.Body>
+           { ButtonName === "Update" &&
+
+            <Modal.Body>
              <div className="pt-[20px] flex flex-col gap-6">
                  <div className="w-full flex flex-col justify-center items-start gap-2">
                      <Form.Label htmlFor="inputTextt">Title</Form.Label>
@@ -66,10 +81,11 @@ export default function UpdateModal({show , handleClose , idPost})
                  </div>
                   
             </div>       
-      </Modal.Body>
+        </Modal.Body> 
+      }
       <Modal.Footer>
            <Button variant="secondary" onClick={handleClose}>Close</Button>
-            <Button variant="primary" onClick={handleData}>Update</Button>
+            <Button variant="primary" onClick={handleData}>{ButtonName}</Button>
      </Modal.Footer>
 </Modal>
     )
