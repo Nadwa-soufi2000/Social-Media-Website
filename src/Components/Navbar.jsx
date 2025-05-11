@@ -5,6 +5,7 @@ import Cookie from 'cookie-universal'
 import { MdMenu } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import { Alert } from 'react-bootstrap';
+import { Link, Links, useParams } from 'react-router-dom';
 
 
 
@@ -19,6 +20,8 @@ export default function Navbar()
 
   const cookie = Cookie()
   const getCookie = cookie.get('media')
+  const userId = cookie.get("userId")
+  const { id } = useParams()
 
   console.log(showAlert)
   
@@ -100,7 +103,9 @@ export default function Navbar()
           <ul className="md:flex md:flex-row flex-col hidden  justify-center items-end md:items-center gap-4 list-none px-2 mt-[10px]" id='ulEle'>
             <li className="font-bold text-[16px] md:text-[18px] lg:text-[21px] text-[#000000]">My Platform</li>
             <li className="font-normal md:text-[16px] lg:text-[19px] text-[#949393]">Home</li>
-            <li className="font-semibold md:text-[16px] lg:text-[19px] text-[#aaa9a9]">Profile</li>
+           {getCookie &&
+            <li className="font-semibold md:text-[16px] lg:text-[19px] text-[#aaa9a9]"><Link to={`/profile/${userId}`} className='font-semibold md:text-[16px] lg:text-[19px] text-[#aaa9a9] no-underline'>Profile</Link></li>
+           }
           </ul>
           {
             getCookie ?

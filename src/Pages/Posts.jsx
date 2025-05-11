@@ -33,10 +33,9 @@ export default function Posts()
         }
     }, [])
     
-    const showPosts = Data.map((item) =>   
+    const showPosts = Data.map((item) =>    
      <Card 
-       key={item} 
-       itNum={item}
+       key={item}
        id={item.id}
        title={item.title}
        userName={item.author.username}
