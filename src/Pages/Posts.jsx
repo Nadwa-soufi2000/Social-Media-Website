@@ -10,6 +10,7 @@ export default function Posts()
     const[Data , setData] = useState([]);
     const[show , setShow] = useState(false);
     const[openModal , setOpenModal] = useState(false);
+    
 
     const cookie = Cookie()
     const getCookie = cookie.get("media")
