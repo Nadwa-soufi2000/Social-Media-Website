@@ -22,7 +22,7 @@ export default function Posts()
     useEffect(() => {
         try
         {
-            axios.get(`${baseURL}/${POSTS}?limit=50`)
+            axios.get(`${baseURL}/${POSTS}?limit=40`)
            .then((res) => {
                setData(res.data.data)
                console.log(res)
@@ -53,6 +53,7 @@ export default function Posts()
 
     return(  
       <>
+        <div className="w-[90%] sm:w-[75%] flex justify-start items-center"><h1 className="text-[18px] md:text-[30px] lg:text-[45px] text-shadow text-shadow-x-2 text-shadow-y-2 text-shadow-blur-2 text-zinc-500">Latest Posts</h1></div>
         <div className="xl:w-[90%] w-full flex justify-center items-center flex-wrap flex-col lg:flex-row  px-1 py-3  rounded-[10px] gap-9">
             {showPosts}
         </div>
