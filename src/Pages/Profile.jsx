@@ -71,17 +71,17 @@ export default function Profile()
         <Navbar />
         { user &&
           <div className="w-full justify-center items-center flex flex-col">
-            <div className=" w-[95%] sm:w-[80%] bg-[#f1f0f0] flex md:flex-row flex-col justify-start gap-9 items-start md:items-center py-8 pl-8  rounded-[10px] shadow-xl">
-                <div className="flex justify-center items-center gap-3">
+            <div className=" w-[95%] sm:w-[80%] bg-[#f1f0f0] flex md:flex-row flex-col justify-start gap-9 items-start md:items-center py-8 sm:pl-8 pl-3  rounded-[10px] shadow-xl">
+                <div className="flex sm:flex-row flex-col justify-center items-start sm:items-center gap-3">
                    {typeof(user.profile_image) === 'string' ?
                      <img className="w-[40px] h-[40px] md:w-[90px] md:h-[90px] rounded-full" src={user.profile_image}/>
                     :
                     <img className="w-[40px] h-[40px] md:w-[90px] md:h-[90px] rounded-full" src={userImg}/>
                    }
                     <div>
-                        <h3 className="font-bold text-[19px] md:text-[27px] lg:text-[35px]">{user.email}</h3>
-                        <h3 className="font-bold text-[19px] md:text-[27px] lg:text-[35px]">{user.username}</h3>
-                        <h3 className="font-bold text-[19px] md:text-[27px] lg:text-[35px]">{user.name}</h3>
+                        <h3 className="font-bold text-[14px] md:text-[27px] lg:text-[35px]">{user.email}</h3>
+                        <h3 className="font-bold text-[14px] md:text-[27px] lg:text-[35px]">{user.username}</h3>
+                        <h3 className="font-bold text-[14px] md:text-[27px] lg:text-[35px]">{user.name}</h3>
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-start gap-3">
