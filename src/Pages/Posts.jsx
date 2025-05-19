@@ -4,12 +4,14 @@ import axios from "axios";
 import { baseURL, POSTS } from "../Components/Api";
 import ModalComponent from "../Components/Modal";
 import Cookie from 'cookie-universal'
+import Loading from "../Components/Loading";
 
 export default function Posts()
 {
     const[Data , setData] = useState([]);
     const[show , setShow] = useState(false);
     const[openModal , setOpenModal] = useState(false);
+    const[loading , setLoading] = useState(true)
     
 
     const cookie = Cookie()
@@ -26,6 +28,7 @@ export default function Posts()
            .then((res) => {
                setData(res.data.data)
                console.log(res)
+               setLoading(false)
            })
         }catch(err)
         {
@@ -53,6 +56,10 @@ export default function Posts()
 
     return(  
       <>
+      {
+        loading ? <Loading />
+         :
+        <>
         <div className="w-[90%] sm:w-[75%] flex justify-start items-center"><h1 className="text-[18px] md:text-[30px] lg:text-[45px] text-shadow text-shadow-x-2 text-shadow-y-2 text-shadow-blur-2 text-zinc-500">Latest Posts</h1></div>
         <div className="xl:w-[90%] w-full flex justify-center items-center flex-wrap flex-col lg:flex-row  px-1 py-3  rounded-[10px] gap-9">
             {showPosts}
@@ -68,6 +75,8 @@ export default function Posts()
         { getCookie &&
              <button className="fixed bottom-[5%] right-[5%] w-[50px] h-[50px] shadow-xl rounded-full text-white bg-green-500 text-[30px] text-center font-bold" onClick={handleClick}>+</button>
         }
+        </>
+    }
      </>
     )
 }
