@@ -12,7 +12,7 @@ export default function PaginatedItems({ itemsPerPage , data , setPage}) {
         pageCount={pageCount}
         previousLabel="<<"
         renderOnZeroPageCount={null}
-        containerClassName="flex justify-center items-center bg-red-400 w-[60%] sm:w-[80%]"
+        containerClassName="flex justify-center items-center w-[60%] sm:w-[80%]"
         pageLinkClassName="w-[7px] h-[7px] sm:w-[30px] no-underline sm:h-[30px] inline-block items-center mx-2  text-gray-500 transition-[0.3s] rounded-full"
         activeLinkClassName=" text-blue-300 flex justify-center items-center"
       />
